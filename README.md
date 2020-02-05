@@ -56,7 +56,14 @@ struct MissileManager
 };
 ```
 
-To get access to the target position or target character of a missile the following function can be hooked: ``
+To get access to the target position of a missile (or target character) and missile speed of a missile, 
+the following function can be hooked: `0x10E17D0`
+![alt text](https://i.ibb.co/nsbNpCV/img.png)
 
+The last part contains an import branch. Function `fn_processMissileTarget` will only be called if the 
+missile has a character as a target. The function `fn_processMissile` will only be called if the missile
+does not have a character as a target (for example a skillshot).
+
+I haven't reversed the character struct but I think that (targetAgent, 0x10) might point to a character struct.
 
 # Effects
