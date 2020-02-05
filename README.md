@@ -5,6 +5,7 @@ The process consists of 2 parts:
 - Effects
 
 Missiles: missiles are kinda like projectiles
+
 Effects: effects are like AoE's (these can sometimes be created with projectiles)
 
 # Missiles
