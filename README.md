@@ -67,3 +67,28 @@ does not have a character as a target (for example a skillshot).
 I haven't reversed the character struct but I think that (targetAgent, 0x10) might point to a character struct.
 
 # Effects
+
+There is a dynamic array that keeps track of every effect that is currently present. This array contains effect(?) structs. Effects(?) get added to the array in the following function: `0x10A0900`
+
+![alt text](https://image.prntscr.com/image/6kysouMLRFC8IkgSdcqvAQ.png)
+
+Structs to iterate over the effects:
+```
+struct Effect
+{
+	char pad_0x0000[0x40]; //0x0000
+	float targetX; //0x0040 
+	char pad_0x0044[0xC]; //0x0044
+	float targetY; //0x0050 
+	char pad_0x0054[0xC]; //0x0054
+	float targetZ; //0x0060 
+};
+
+struct EffectManager
+{
+	BYTE gap0[8];
+	Effect** effects;
+	BYTE gap1[4];
+	unsigned int maxEffects;
+};
+```
