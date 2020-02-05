@@ -56,4 +56,7 @@ struct MissileManager
 };
 ```
 
+To get access to the target position or target character of a missile the following function can be hooked: ``
+
+
 # Effects
