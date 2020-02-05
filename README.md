@@ -65,6 +65,12 @@ missile has a character as a target. The function `fn_processMissile` will only 
 does not have a character as a target (for example a skillshot).
 
 I haven't reversed the character struct but I think that (targetAgent, 0x10) might point to a character struct.
+Also the target position of a missile eventually gets stored into the missile struct (the one above). But
+the stored coordinates that are in this struct are transformed by a set of floats. By hooking this(`0x10E17D0`) 
+function you will get the real target coordinates.
+
+TODO for missiles:
+- find the source character of a missile (can be useful for PvP?)
 
 # Effects
 
@@ -92,3 +98,6 @@ struct EffectManager
 	unsigned int maxEffects;
 };
 ```
+TODO for effects:
+- find the skillId (Important)
+
