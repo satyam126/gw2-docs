@@ -1,6 +1,6 @@
 # Squad functions
 
-![][https://i.ibb.co/mBmH4vW/squad.png]
+![](https://i.ibb.co/mBmH4vW/squad.png)
 
 ```
 Name: fn_updateSquadInfo
