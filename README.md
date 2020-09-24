@@ -1,6 +1,6 @@
 # Squad functions
 This update will add an api for the squad panel. It also allows one to automatically create a squad.
-![](https://i.ibb.co/mBmH4vW/squad.png)
+![](https://i.ibb.co/Jt2TmPL/squad.png)
 
 ```
 Name: fn_updateSquadInfo
@@ -23,3 +23,4 @@ So in total you have the following functions:
 5. privateSquad(this, flag), flag can be true or false
 6. setJoinRules(this, mode), mode can be 0-2 (all inclusive)
 7. leaveSquad(this)
+8. readyCheck(this)
