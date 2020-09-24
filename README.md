@@ -9,7 +9,7 @@ Can be located with string "selectedIcon"
 ```
 Most of the important squad functions are being called in this function.
 
-![](https://i.ibb.co/cxYxSbr/fn-update-Squad-Info.png)
+![](https://i.ibb.co/vqgL5h1/fn-update-Squad-Info.png)
 
 You can ignore most of the body of the switch cases. You just have to pay attention to the function calls of the following context classes:
 1. fn_getSquadCtx (0x489ed0)
