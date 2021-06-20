@@ -1,23 +1,33 @@
-# Realtime Skill Duration
+# Orders
+The notify table you called ```IAgentCharNotifyVftable__``` contains the function ```BeginOrder```.
+The ```BeginOrder``` function adds "orders" to a list. This list can be found at ```rcx + 0x28```.
 
-![alt text](https://i.ibb.co/tD6BzvW/yellowbar.png)
-
-The goal of this post is to track the progress of a skill (0-100%). <br/>
-I have found an UI function that gets called every time the yellow bar gets updated. This function can be found with the following string: ```"..\\..\\..\\Game\\Ui\\Widgets\\SkillProgress\\SkpSegment.cpp"```
-
-![alt text](https://i.ibb.co/JmwhPNg/On-Skill-Segment.png)<br/>
-A percentage gets computed at line 47. The passed time ```(0x48)``` get divided by the total cast time of the skill ```(0x54)```. The goal is to extract that percentage. Currently I'm achieving that by using a hook.
+![alt text](https://i.ibb.co/0J7k0xD/Create-Order.png)
 <br/>
-I've tried to trace the ```v3``` (first argument of this function) back to the origin. But it seems like that this field is entangled in UI related stuff.
+This ```CreateOrder``` function that is being called in the function ```BeginOrder``` can create an order of several types(skill cast, movement, evade, etc).
+
+![alt text](https://i.ibb.co/c6dH2jJ/Construct-Order.png)
+<br/>
+Variable ```v5``` is the second argument of this function. It is probably some kind of bitfield because its being used like this in ```BeginOrder```:
+* ```(v5 >> 4) & 1```
+* ```orderIndex = (v5 >> 5) & 1;```
+<br/>
+
+Variable ```v4``` is the third argument of this function. It is a pointer to a struct that contains the Id of an order.
 <br/>
 <br/>
-If you keep hitting xref on the original function you will end up in a big switch statement:
-![alt text](https://i.ibb.co/vHkrCJV/uiSwitch.png)<br/>
-The first argument of this function contains some sort of ```frameId```.
-This ```frameId``` also matches on where I assume this ```frame``` might gets initialized/created?
+<br/>
+<br/>
+![alt text](https://i.ibb.co/r4g2k3S/Skill-Order-Construct.png)
+<br/>
+<br/>
+<br/>
+<br/>
+Looking at the contents of the SkillOrder object in memory will yield the following image:
+![alt text](https://i.ibb.co/gzZnQqk/Skill-Order.png)
+The most important things that an order should have are:
+1. UNIQUE order id
+2. Something that determines the skillId (skillDef or some derivative)
+3. *Timestamp when the order was placed (optional, can be estimated with a loop)
 
-This is the function where I think the ```frame``` gets initialized/created? (I hooked it to extract the ```frameId``` and it only got called once): (found with: "..\\..\\..\\Game\\Ui\\Widgets\\SkillProgress\\SkpWarmup.cpp")
-![alt text](https://i.ibb.co/0VHDkqQ/Create-Skill-Warmup.png)<br/>
-
-The arguments of this function are easy to trace back (```Character```, ```Order```, ```CharSkill```, ```SkillDef```, etc.). This function gets called from some kind of ```Order``` class. Your player character has an Order struct that contains an array of Orders. This array
-contains the current active orders. Currently I've identified orders such as ```SkillOrder``` and ```MovementOrder```. Unfortunately the arguments of the function that gets called on every skill progress bar update is not that easy to trace back.
+&ast; The timestamp I found is not stable, I wonder if we can find one.
