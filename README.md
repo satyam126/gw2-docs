@@ -11,8 +11,8 @@ This ```CreateOrder``` function that is being called in the function ```BeginOrd
 Variable ```v5``` is the second argument of this function. It is probably some kind of bitfield because its being used like this in ```BeginOrder```:
 * ```(v5 >> 4) & 1```
 * ```orderIndex = (v5 >> 5) & 1;```
+* This could indicate the type of the order?
 <br/>
-This could indicate the type of the order?
 
 Variable ```v4``` is the third argument of this function. It is a pointer to a struct that contains the Id of an order.
 <br/>
