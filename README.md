@@ -12,6 +12,7 @@ Variable ```v5``` is the second argument of this function. It is probably some k
 * ```(v5 >> 4) & 1```
 * ```orderIndex = (v5 >> 5) & 1;```
 <br/>
+This could indicate the type of the order?
 
 Variable ```v4``` is the third argument of this function. It is a pointer to a struct that contains the Id of an order.
 <br/>
@@ -30,4 +31,4 @@ The most important things that an order should have are:
 2. Something that determines the skillId (skillDef or some derivative)
 3. *Timestamp when the order was placed (optional, can be estimated with a loop)
 
-&ast; The timestamp I found is not stable, I wonder if we can find one.
+&ast; The timestamp I found is unfortunately not stable, I wonder if we can find one.
