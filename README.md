@@ -1,4 +1,9 @@
 # Orders
+This change will expose the orders. This will allow us to do the following:
+- view interactions/channels with gadgets
+- view dodges from other players
+- view accurate skill start times
+
 The notify table you called ```IAgentCharNotifyVftable__``` contains the function ```BeginOrder```.
 The ```BeginOrder``` function adds "orders" to a list. This list can be found at ```rcx + 0x28```.
 
@@ -32,3 +37,4 @@ The most important things that an order should have are:
 3. *Timestamp when the order was placed (optional, can be estimated with a loop)
 
 &ast; The timestamp I found is unfortunately not stable, I wonder if we can find one.
+
